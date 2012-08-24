@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RelayServer", "RelayServer\RelayServer.csproj", "{3E7F423D-CF7A-42C8-8FCE-8A2514459801}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RelayClient", "RelayClient\RelayClient.csproj", "{06B1BD65-555C-4099-B7DE-E3DB0A61E9C3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{06B1BD65-555C-4099-B7DE-E3DB0A61E9C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06B1BD65-555C-4099-B7DE-E3DB0A61E9C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06B1BD65-555C-4099-B7DE-E3DB0A61E9C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06B1BD65-555C-4099-B7DE-E3DB0A61E9C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E7F423D-CF7A-42C8-8FCE-8A2514459801}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E7F423D-CF7A-42C8-8FCE-8A2514459801}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E7F423D-CF7A-42C8-8FCE-8A2514459801}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E7F423D-CF7A-42C8-8FCE-8A2514459801}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
