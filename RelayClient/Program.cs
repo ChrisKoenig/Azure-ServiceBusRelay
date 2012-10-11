@@ -24,7 +24,8 @@ namespace RelayClient
 
             using (var ch = cf.CreateChannel())
             {
-                Console.WriteLine(ch.ReverseString("Chris Koenig"));
+                var inputString = args.Length > 0 ? args[0].ToString() : "Chris Koenig";
+                Console.WriteLine(ch.ReverseString(inputString));
             }
 
         }

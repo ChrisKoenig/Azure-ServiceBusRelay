@@ -379,10 +379,10 @@
       <summary>The server is busy.</summary>
     </member>
     <member name="F:Microsoft.ServiceBus.ExceptionErrorCodes.BadGatewayFailure">
-      <summary />
+      <summary>The error is caused by bad gateway.</summary>
     </member>
     <member name="F:Microsoft.ServiceBus.ExceptionErrorCodes.GatewayTimeoutFailure">
-      <summary />
+      <summary>The gateway did not receive a timely response from the upstream server.</summary>
     </member>
     <member name="F:Microsoft.ServiceBus.ExceptionErrorCodes.UnknownExceptionDetail">
       <summary>The detail of an unknown exception.</summary>
@@ -1050,6 +1050,15 @@
       <param name="path">The path of the topic relative to the service namespace base address.</param>
       <param name="callback">An <see cref="T:System.AsyncCallback" /> delegate that references the method to invoke when the operation is complete.</param>
       <param name="state">A user-defined object that contains state information about the asynchronous operation. This object is passed to the <see cref="M:Microsoft.ServiceBus.NamespaceManager.EndTopicExists(System.IAsyncResult)" /> delegate when the operation is complete.</param>
+    </member>
+    <member name="M:Microsoft.ServiceBus.NamespaceManager.Create">
+      <summary>Creates a new instance of <see cref="T:Microsoft.ServiceBus.NamespaceManager" />.</summary>
+      <returns>A new instance of <see cref="T:Microsoft.ServiceBus.NamespaceManager" />.</returns>
+    </member>
+    <member name="M:Microsoft.ServiceBus.NamespaceManager.CreateFromConnectionString(System.String)">
+      <summary>Creates a new instance of <see cref="T:Microsoft.ServiceBus.NamespaceManager" /> using a specified connection string.</summary>
+      <returns>A new instance of <see cref="T:Microsoft.ServiceBus.NamespaceManager" />.</returns>
+      <param name="connectionString">The connection sting used.</param>
     </member>
     <member name="M:Microsoft.ServiceBus.NamespaceManager.CreateQueue(Microsoft.ServiceBus.Messaging.QueueDescription)">
       <summary>Creates a new queue in the service namespace with the specified queue description.</summary>
@@ -5372,6 +5381,10 @@ This mode additionally requires outbound port 819 for the NAT prediction algorit
       <param name="info">The serialized object data about the exception being thrown.</param>
       <param name="context">The contextual information about the source or destinations.</param>
     </member>
+    <member name="P:Microsoft.ServiceBus.Messaging.MessagingException.IsTransient">
+      <summary>Gets a value indicating whether the exception is transient.</summary>
+      <returns>True if the exception is transient; otherwise, false.</returns>
+    </member>
     <member name="P:Microsoft.ServiceBus.Messaging.MessagingException.Timestamp">
       <summary>Gets or sets the time at which the messaging exception occurred.</summary>
       <returns>The time at which the messaging exception occurred.</returns>
@@ -5522,6 +5535,10 @@ This mode additionally requires outbound port 819 for the NAT prediction algorit
       <param name="callback">The callback.</param>
       <param name="state">The state.</param>
     </member>
+    <member name="M:Microsoft.ServiceBus.Messaging.MessagingFactory.Create">
+      <summary>Creates a new messaging factory object.</summary>
+      <returns>The newly created <see cref="T:Microsoft.ServiceBus.Messaging.MessagingFactory" /> object.</returns>
+    </member>
     <member name="M:Microsoft.ServiceBus.Messaging.MessagingFactory.Create(System.String,Microsoft.ServiceBus.Messaging.MessagingFactorySettings)">
       <summary>Creates a new <see cref="T:Microsoft.ServiceBus.Messaging.MessagingFactory" /> object.</summary>
       <returns>The newly created <see cref="T:Microsoft.ServiceBus.Messaging.MessagingFactory" /> object.</returns>
@@ -5559,6 +5576,11 @@ This mode additionally requires outbound port 819 for the NAT prediction algorit
       <exception cref="T:System.ArgumentException">
         <paramref name="address" /> contains a path appended to the full address of the service namespace.</exception>
       <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="tokenProvider" /> or <paramref name="address" /> are null.</exception>
+    </member>
+    <member name="M:Microsoft.ServiceBus.Messaging.MessagingFactory.CreateFromConnectionString(System.String)">
+      <summary>Creates a new <see cref="T:Microsoft.ServiceBus.Messaging.MessagingFactory" /> object from a connection string.</summary>
+      <returns>The newly created <see cref="T:Microsoft.ServiceBus.Messaging.MessagingFactory" /> object.</returns>
+      <param name="connectionString">The connection string.</param>
     </member>
     <member name="M:Microsoft.ServiceBus.Messaging.MessagingFactory.CreateMessageReceiver(System.String)">
       <summary>Creates a message receiver.</summary>
@@ -5761,13 +5783,26 @@ This mode additionally requires outbound port 819 for the NAT prediction algorit
       <summary>Initializes a new instance of the <see cref="T:Microsoft.ServiceBus.Messaging.MessagingFactorySettings" /> class with the specified messaging factory settings for cloning.</summary>
       <param name="other">The specified messaging factory settings.</param>
     </member>
-    <member name="M:Microsoft.ServiceBus.Messaging.MessagingFactorySettings.Clone"></member>
+    <member name="M:Microsoft.ServiceBus.Messaging.MessagingFactorySettings.Clone">
+      <summary>Creates a copy of <see cref="T:Microsoft.ServiceBus.Messaging.MessagingFactorySettings" />.</summary>
+      <returns>A created copy of <see cref="T:Microsoft.ServiceBus.Messaging.MessagingFactorySettings" />.</returns>
+    </member>
     <member name="P:Microsoft.ServiceBus.Messaging.MessagingFactorySettings.NetMessagingTransportSettings">
       <summary>Gets or sets the transport settings required for the net messaging.</summary>
       <returns>The transport settings required for the net messaging.</returns>
     </member>
-    <member name="M:Microsoft.ServiceBus.Messaging.MessagingFactorySettings.OnBeginCreateFactory(System.Uri,System.AsyncCallback,System.Object)"></member>
-    <member name="M:Microsoft.ServiceBus.Messaging.MessagingFactorySettings.OnEndCreateFactory(System.IAsyncResult)"></member>
+    <member name="M:Microsoft.ServiceBus.Messaging.MessagingFactorySettings.OnBeginCreateFactory(System.Uri,System.AsyncCallback,System.Object)">
+      <summary>Executes the begin create factory action.</summary>
+      <returns>The executed action.</returns>
+      <param name="uri">The uniform resource identifier.</param>
+      <param name="callback">The asynchronous callback.</param>
+      <param name="state">The state.</param>
+    </member>
+    <member name="M:Microsoft.ServiceBus.Messaging.MessagingFactorySettings.OnEndCreateFactory(System.IAsyncResult)">
+      <summary>Executes the end create factory action.</summary>
+      <returns>The result of the execution.</returns>
+      <param name="result">The result of the execution.</param>
+    </member>
     <member name="P:Microsoft.ServiceBus.Messaging.MessagingFactorySettings.OperationTimeout">
       <summary>Gets or sets the <see cref="T:System.TimeSpan" /> that specifies how long the messaging operation has to complete before timing out.</summary>
       <returns>The <see cref="T:System.TimeSpan" /> that specifies how long the messaging operation has to complete before timing out. The default value is one minute.</returns>
@@ -6085,6 +6120,30 @@ This mode additionally requires outbound port 819 for the NAT prediction algorit
       <exception cref="T:System.TimeoutException">Thrown if the operation exceeded the timeout value set by  <see cref="T:Microsoft.ServiceBus.Messaging.MessagingFactorySettings.OperationTimeout" /></exception>
       <exception cref="T:System.ObjectDisposedException">Thrown if the client entity has been closed or aborted.</exception>
       <exception cref="T:Microsoft.ServiceBus.Messaging.MessageLockLostException">Thrown if the message represented by the <paramref name="lockToken" /> has lost the message lock.</exception>
+    </member>
+    <member name="M:Microsoft.ServiceBus.Messaging.QueueClient.Create(System.String)">
+      <summary>Creates a new copy of <see cref="T:Microsoft.ServiceBus.Messaging.QueueClient" /> with specified path.</summary>
+      <returns>The created <see cref="T:Microsoft.ServiceBus.Messaging.QueueClient" />.</returns>
+      <param name="path">The path.</param>
+    </member>
+    <member name="M:Microsoft.ServiceBus.Messaging.QueueClient.Create(System.String,Microsoft.ServiceBus.Messaging.ReceiveMode)">
+      <summary>Creates a new copy of <see cref="T:Microsoft.ServiceBus.Messaging.QueueClient" /> with specified path and mode.</summary>
+      <returns>The created <see cref="T:Microsoft.ServiceBus.Messaging.QueueClient" />.</returns>
+      <param name="path">The path.</param>
+      <param name="mode">The mode.</param>
+    </member>
+    <member name="M:Microsoft.ServiceBus.Messaging.QueueClient.CreateFromConnectionString(System.String,System.String)">
+      <summary>Creates a new copy of <see cref="T:Microsoft.ServiceBus.Messaging.QueueClient" /> from connection string with specified path.</summary>
+      <returns>The created <see cref="T:Microsoft.ServiceBus.Messaging.QueueClient" />.</returns>
+      <param name="connectionString">The connection string used.</param>
+      <param name="path">The path.</param>
+    </member>
+    <member name="M:Microsoft.ServiceBus.Messaging.QueueClient.CreateFromConnectionString(System.String,System.String,Microsoft.ServiceBus.Messaging.ReceiveMode)">
+      <summary>Creates a new copy of <see cref="T:Microsoft.ServiceBus.Messaging.QueueClient" /> from connection string with specified path and mode.</summary>
+      <returns>The created <see cref="T:Microsoft.ServiceBus.Messaging.QueueClient" />.</returns>
+      <param name="connectionString">The connection string.</param>
+      <param name="path">The path.</param>
+      <param name="mode">The mode.</param>
     </member>
     <member name="M:Microsoft.ServiceBus.Messaging.QueueClient.DeadLetter(System.Guid)">
       <summary>Moves the undelivered message to the dead letter queue.</summary>
@@ -6463,14 +6522,15 @@ This mode additionally requires outbound port 819 for the NAT prediction algorit
     </member>
     <member name="M:Microsoft.ServiceBus.Messaging.SqlFilter.#ctor(System.String)">
       <summary>Initializes a new instance of the <see cref="T:Microsoft.ServiceBus.Messaging.SqlFilter" /> class using the specified SQL expression.</summary>
+      <param name="sqlExpression">The SQL expression.</param>
     </member>
     <member name="P:Microsoft.ServiceBus.Messaging.SqlFilter.CompatibilityLevel">
       <summary>This property is reserved for future use. An integer value showing the compatibility level, currently hard-coded to 20.</summary>
-      <returns>Returns <see cref="T:System.Int32" />.</returns>
+      <returns>The compatibility level.</returns>
     </member>
     <member name="M:Microsoft.ServiceBus.Messaging.SqlFilter.Match(Microsoft.ServiceBus.Messaging.BrokeredMessage)">
-      <summary>Matches a message against the current SQL expression.</summary>
-      <returns>true if it matches; otherwise, false.</returns>
+      <summary>Specifies whether a message matches against the current SQL expression.</summary>
+      <returns>truea message matches against the current SQL expression; otherwise, false.</returns>
       <param name="message">The BrokeredMessage.</param>
     </member>
     <member name="M:Microsoft.ServiceBus.Messaging.SqlFilter.Preprocess">
@@ -6747,6 +6807,34 @@ This mode additionally requires outbound port 819 for the NAT prediction algorit
       <exception cref="T:System.ObjectDisposedException">Thrown if the client entity has been closed or aborted.</exception>
       <exception cref="T:Microsoft.ServiceBus.Messaging.MessageLockLostException">Thrown if the message represented by <paramref name="lockToken" /> has lost the message lock.</exception>
     </member>
+    <member name="M:Microsoft.ServiceBus.Messaging.SubscriptionClient.Create(System.String,System.String)">
+      <summary>Creates a new copy of <see cref="T:Microsoft.ServiceBus.Messaging.SubscriptionClient" /> with specified name and topic path.</summary>
+      <returns>A new copy of <see cref="T:Microsoft.ServiceBus.Messaging.SubscriptionClient" />.</returns>
+      <param name="topicPath">The full pathname of the topic.</param>
+      <param name="name">The name of the subscription.</param>
+    </member>
+    <member name="M:Microsoft.ServiceBus.Messaging.SubscriptionClient.Create(System.String,System.String,Microsoft.ServiceBus.Messaging.ReceiveMode)">
+      <summary>Creates a new copy of <see cref="T:Microsoft.ServiceBus.Messaging.SubscriptionClient" /> with specified name, topic path and mode.</summary>
+      <returns>A new copy of <see cref="T:Microsoft.ServiceBus.Messaging.SubscriptionClient" />.</returns>
+      <param name="topicPath">The full pathname of the topic.</param>
+      <param name="name">The name of the subscription.</param>
+      <param name="mode">The message receive mode.</param>
+    </member>
+    <member name="M:Microsoft.ServiceBus.Messaging.SubscriptionClient.CreateFromConnectionString(System.String,System.String,System.String)">
+      <summary>Creates a new copy of <see cref="T:Microsoft.ServiceBus.Messaging.SubscriptionClient" /> from a connection string with specified topic path and name.</summary>
+      <returns>A new copy of <see cref="T:Microsoft.ServiceBus.Messaging.SubscriptionClient" />.</returns>
+      <param name="connectionString">The connection string.</param>
+      <param name="topicPath">The full pathname of the topic.</param>
+      <param name="name">The name of the subscription.</param>
+    </member>
+    <member name="M:Microsoft.ServiceBus.Messaging.SubscriptionClient.CreateFromConnectionString(System.String,System.String,System.String,Microsoft.ServiceBus.Messaging.ReceiveMode)">
+      <summary>Creates a new copy of <see cref="T:Microsoft.ServiceBus.Messaging.SubscriptionClient" /> from a connection string with specified topic path, name and mode.</summary>
+      <returns>A new copy of <see cref="T:Microsoft.ServiceBus.Messaging.SubscriptionClient" />.</returns>
+      <param name="connectionString">The connection string.</param>
+      <param name="topicPath">The full pathname of the topic.</param>
+      <param name="name">The name of the subscription.</param>
+      <param name="mode">The message receive mode.</param>
+    </member>
     <member name="M:Microsoft.ServiceBus.Messaging.SubscriptionClient.DeadLetter(System.Guid)">
       <summary>Moves the undelivered message to the dead letter queue.</summary>
       <param name="lockToken">The lock token bound to the locked message instance.</param>
@@ -7021,6 +7109,17 @@ This mode additionally requires outbound port 819 for the NAT prediction algorit
       <exception cref="T:System.NotSupportedException">Thrown if the Deadletter topic/subscription pointed to does not support the send operation.</exception>
       <exception cref="T:System.ObjectDisposedException">Thrown if the client entity has been closed or aborted.</exception>
     </member>
+    <member name="M:Microsoft.ServiceBus.Messaging.TopicClient.Create(System.String)">
+      <summary>Creates a new instance of <see cref="T:Microsoft.ServiceBus.Messaging.TopicClient" />.</summary>
+      <returns>The created <see cref="T:Microsoft.ServiceBus.Messaging.TopicClient" />.</returns>
+      <param name="path">The path.</param>
+    </member>
+    <member name="M:Microsoft.ServiceBus.Messaging.TopicClient.CreateFromConnectionString(System.String,System.String)">
+      <summary>Creates a new instance of <see cref="T:Microsoft.ServiceBus.Messaging.TopicClient" />using a specified connection string.</summary>
+      <returns>The created <see cref="T:Microsoft.ServiceBus.Messaging.TopicClient" />.</returns>
+      <param name="connectionString">The connection string used.</param>
+      <param name="path">The path.</param>
+    </member>
     <member name="M:Microsoft.ServiceBus.Messaging.TopicClient.EndSend(System.IAsyncResult)">
       <summary>Finishes an asynchronous operation to send a message.</summary>
       <param name="result">An <see cref="T:System.IAsyncResult" /> that represents the status of the asynchronous operation to send a message.</param>
@@ -7241,7 +7340,11 @@ This mode additionally requires outbound port 819 for the NAT prediction algorit
       <returns>Returns a <see cref="T:System.IO.Stream" /> that contains the stream of the message. A Stream is always returned regardless of whether the Message body is empty.</returns>
       <param name="message">The message.</param>
     </member>
-    <member name="M:Microsoft.ServiceBus.Web.StreamMessageHelper.GetStream(System.Xml.XmlDictionaryReader)"></member>
+    <member name="M:Microsoft.ServiceBus.Web.StreamMessageHelper.GetStream(System.Xml.XmlDictionaryReader)">
+      <summary>Retrieves the stream of the specified message with specified reader.</summary>
+      <returns>The stream of the specified message.</returns>
+      <param name="reader">The reader.</param>
+    </member>
     <member name="T:Microsoft.ServiceBus.Web.StreamWriterDelegate">
       <summary>This delegate is used by StreamMessageHelper to write the body of streamed messages.</summary>
       <param name="output">The stream to write the message body to.</param>
